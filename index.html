@@ -6,7 +6,7 @@
 <title>Matis Sonzini → Paid Social & Creative Strategy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Sora:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#faf8f5;
@@ -33,7 +33,7 @@
   --r:16px;--rs:8px;--pill:100px;
   --d:'DM Serif Display',Georgia,serif;
   --b:'Sora',sans-serif;
-  --m:'Space Mono',monospace;
+  --m:'Roboto',sans-serif;
   --ease:cubic-bezier(.25,.46,.45,.94);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -103,8 +103,17 @@ strong{font-weight:700;color:var(--text)}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
 .tg{font-family:var(--m);font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;background:rgba(67,97,238,.06);color:var(--blue);padding:4px 12px;border-radius:var(--pill);border:1px solid rgba(67,97,238,.1)}
 
+/* ===== HERO BLOBS ===== */
+@keyframes blobFloat1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(100px,-80px) scale(1.1)}66%{transform:translate(-70px,90px) scale(.9)}}
+@keyframes blobFloat2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-90px,70px) scale(.92)}66%{transform:translate(80px,-100px) scale(1.08)}}
+@keyframes blobFloat3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-80px,-70px) scale(1.1)}}
+.hero-blob{position:absolute;border-radius:50%;pointer-events:none;}
+.hero-blob-1{width:600px;height:600px;top:-180px;left:-150px;background:radial-gradient(circle,rgba(67,97,238,.35) 0%,transparent 65%);filter:blur(40px);animation:blobFloat1 4s ease-in-out infinite;}
+.hero-blob-2{width:500px;height:500px;bottom:-150px;right:-120px;background:radial-gradient(circle,rgba(232,93,42,.32) 0%,transparent 65%);filter:blur(35px);animation:blobFloat2 5s ease-in-out infinite;}
+.hero-blob-3{width:380px;height:380px;top:35%;right:18%;background:radial-gradient(circle,rgba(174,85,226,.28) 0%,transparent 65%);filter:blur(30px);animation:blobFloat3 3.5s ease-in-out infinite;}
 /* ===== CLIENTS ===== */
-.clients{padding:80px 40px;background:var(--bg2)}
+@keyframes ambientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.clients{padding:80px 40px;background:linear-gradient(135deg,#ede8fc,#fce8e0,#e8f0fc,#fdf5e8,#ede8fc);background-size:400% 400%;animation:ambientShift 15.6s ease infinite;}
 .cl-grid{display:flex;flex-wrap:wrap;gap:10px;max-width:1100px;margin:0 auto;justify-content:center}
 .cl-p{font-family:var(--m);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;background:var(--card);border:1px solid var(--brd);border-radius:var(--pill);padding:10px 22px;color:var(--sec);transition:all .25s var(--ease);min-height:44px;display:inline-flex;align-items:center;cursor:pointer;text-decoration:none;}
 .cl-p:hover{border-color:var(--warm);color:var(--text);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.05)}
@@ -762,6 +771,54 @@ document.querySelectorAll('.rv').forEach(function(el){o.observe(el)})}();
 
   requestAnimationFrame(animate);
 }();
+
+// ===== CLIENTS PROXIMITY GLOW =====
+!function(){
+  var grid = document.querySelector('.cl-grid');
+  if(!grid) return;
+  var items = [];
+  function refresh(){ items = Array.from(grid.querySelectorAll('.cl-p')); }
+  refresh();
+
+  grid.addEventListener('mousemove', function(e){
+    items.forEach(function(el){
+      var r = el.getBoundingClientRect();
+      var cx = r.left + r.width/2, cy = r.top + r.height/2;
+      var dist = Math.sqrt((e.clientX-cx)*(e.clientX-cx)+(e.clientY-cy)*(e.clientY-cy));
+      var max = 160;
+      if(dist < max){
+        var t = 1 - dist/max;
+        el.style.transform = 'translateY('+(-t*5)+'px) scale('+(1+t*0.06)+')';
+        el.style.boxShadow = '0 6px 24px rgba(232,93,42,'+(t*.22)+'), 0 0 '+(t*18)+'px rgba(67,97,238,'+(t*.14)+')';
+        el.style.borderColor = 'rgba(232,93,42,'+(t*.7)+')';
+        el.style.color = 'var(--text)';
+      } else {
+        el.style.transform = '';
+        el.style.boxShadow = '';
+        el.style.borderColor = '';
+        el.style.color = '';
+      }
+    });
+  });
+
+  grid.addEventListener('mouseleave', function(){
+    items.forEach(function(el){
+      el.style.transform=''; el.style.boxShadow=''; el.style.borderColor=''; el.style.color='';
+    });
+  });
+}();
+
+// ===== HERO BLOBS =====
+!function(){
+  var hero = document.querySelector('.hero');
+  if(!hero) return;
+  [1,2,3].forEach(function(n){
+    var b = document.createElement('div');
+    b.className = 'hero-blob hero-blob-'+n;
+    hero.insertBefore(b, hero.firstChild);
+  });
+}();
+
 </script>
 </body>
 </html>
