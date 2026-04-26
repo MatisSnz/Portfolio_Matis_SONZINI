@@ -860,7 +860,8 @@ document.querySelectorAll('.rv').forEach(function(el){o.observe(el)})}();
     entries.forEach(function(e){
       if(e.isIntersecting){
         e.target.classList.add('tl-logo-in');
-        obs.unobserve(e.target);
+      } else {
+        e.target.classList.remove('tl-logo-in');
       }
     });
   },{threshold:0.35,rootMargin:'0px 0px -60px 0px'});
