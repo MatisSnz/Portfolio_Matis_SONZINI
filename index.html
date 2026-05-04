@@ -844,6 +844,24 @@ document.querySelectorAll('.rv').forEach(function(el){o.observe(el)})}();
 
   function clearAuto(){ clearTimeout(autoTimer); autoTimer = null; }
 
+  function tryAutoplay(el){
+    var v  = el.querySelector('video');
+    if(!v) return;
+    var ov = el.querySelector('.cmp-play-overlay');
+    var ct = el.querySelector('.cmp-ctrl');
+    ov.style.opacity = '0';
+    ov.style.pointerEvents = 'none';
+    v.style.pointerEvents = 'auto';
+    if(ct) ct.classList.add('active');
+    var p = v.play();
+    if(p !== undefined) p.catch(function(){
+      ov.style.opacity = '';
+      ov.style.pointerEvents = '';
+      v.style.pointerEvents = 'none';
+      if(ct) ct.classList.remove('active');
+    });
+  }
+
   renderOrder.forEach(function(c, i){
     var el = document.createElement('div');
     el.className = 'cmp-item';
@@ -854,6 +872,7 @@ document.querySelectorAll('.rv').forEach(function(el){o.observe(el)})}();
       vid.preload = 'metadata';
       vid.playsInline = true;
       vid.volume = 0.3;
+      vid.muted = true;
       vid.style.pointerEvents = 'none';
       el.appendChild(vid);
 
@@ -867,7 +886,7 @@ document.querySelectorAll('.rv').forEach(function(el){o.observe(el)})}();
       prog.appendChild(fill);
       var muteBtn = document.createElement('button');
       muteBtn.className = 'cmp-ctrl-mute';
-      muteBtn.innerHTML = '&#128266;';
+      muteBtn.innerHTML = '&#128263;';
       muteBtn.addEventListener('click', function(e){
         e.stopPropagation();
         vid.muted = !vid.muted;
@@ -973,7 +992,10 @@ document.querySelectorAll('.rv').forEach(function(el){o.observe(el)})}();
           track.style.transform  = 'translateX(' + tx2 + 'px)';
         }
         transiting = false;
+        tryAutoplay(allItems[vIdx]);
       }, 380);
+    } else {
+      tryAutoplay(feat);
     }
   }
 
@@ -994,7 +1016,14 @@ document.querySelectorAll('.rv').forEach(function(el){o.observe(el)})}();
   var resizeT;
   window.addEventListener('resize', function(){
     clearTimeout(resizeT);
-    resizeT = setTimeout(function(){ cmpGoto(vIdx, false); }, 150);
+    resizeT = setTimeout(function(){
+      track.offsetHeight;
+      var wrap = track.parentElement;
+      var feat = allItems[vIdx];
+      var tx = Math.round(wrap.offsetWidth / 2 - feat.offsetLeft - feat.offsetWidth / 2);
+      track.style.transition = 'none';
+      track.style.transform  = 'translateX(' + tx + 'px)';
+    }, 150);
   });
 
   cmpGoto(NC, false);
