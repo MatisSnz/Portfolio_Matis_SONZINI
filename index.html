@@ -3,7 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matis Sonzini → Paid Social & Creative Strategy</title>
+<title>Matis Sonzini → Consultant Paid Social & Creative Strategy · Lyon</title>
+<meta name="description" content="Consultant Paid Social & Creative Strategy basé à Lyon. Spécialiste Meta Ads, TikTok Ads, stratégie créative et performance. +25 marques accompagnées, +3M€ de budgets gérés.">
+<meta name="author" content="Matis Sonzini">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://matissonzini.com/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://matissonzini.com/">
+<meta property="og:title" content="Matis Sonzini → Consultant Paid Social & Creative Strategy · Lyon">
+<meta property="og:description" content="Consultant Paid Social & Creative Strategy basé à Lyon. Meta Ads, TikTok Ads, stratégie créative orientée performance. +3M€ de budgets gérés.">
+<meta property="og:image" content="https://matissonzini.com/og-cover.jpg">
+<meta property="og:locale" content="fr_FR">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Matis Sonzini — Consultant Paid Social & Creative Strategy">
+<meta name="twitter:description" content="Spécialiste Meta Ads, TikTok Ads et stratégie créative. +25 marques, +3M€ budgets gérés. Basé à Lyon.">
+
+<!-- JSON-LD Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Matis Sonzini",
+  "jobTitle": "Consultant Paid Social & Creative Strategy",
+  "url": "https://matissonzini.com",
+  "email": "sonzini.matis@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Lyon",
+    "addressCountry": "FR"
+  },
+  "alumniOf": [
+    {"@type": "CollegeOrUniversity", "name": "ICN Business School"},
+    {"@type": "CollegeOrUniversity", "name": "École Supérieure du Digital"}
+  ],
+  "knowsAbout": ["Meta Ads", "TikTok Ads", "Creative Strategy", "Paid Social", "Performance Marketing"],
+  "sameAs": ["https://www.linkedin.com/in/matis-sonzini/"]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -190,6 +231,55 @@ strong{font-weight:700;color:var(--text)}
 .bc-body{background:var(--card);border:1px solid var(--brd);border-radius:var(--r);padding:40px 48px;max-width:800px;margin:0 auto;box-shadow:0 4px 20px rgba(0,0,0,.04)}
 .bc-body p{font-size:.95rem;color:var(--sec);line-height:1.85;margin-bottom:16px}
 .bc-body p:last-child{margin-bottom:0}
+
+/* ===== CAMPAIGNS ===== */
+.campaigns{padding:100px 40px;background:var(--bg2);position:relative;overflow:hidden}
+.cmp-inner{max-width:1100px;margin:0 auto}
+.cmp-title{font-family:var(--d);font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.2;letter-spacing:-.02em;margin-bottom:48px}
+.cmp-title em{font-style:italic;color:var(--warm)}
+
+/* Stage = track area + info panel */
+.cmp-stage{display:flex;align-items:center;gap:40px}
+.cmp-track-outer{flex:1;display:flex;align-items:center;gap:16px;min-width:0}
+.cmp-track-wrap{flex:1;overflow:hidden;position:relative}
+.cmp-track{display:flex;align-items:center;gap:12px;will-change:transform}
+
+/* Items */
+.cmp-item{flex-shrink:0;width:170px;cursor:pointer;transition:opacity .3s var(--ease);position:relative;border-radius:var(--r);overflow:hidden}
+.cmp-item img,.cmp-item video{display:block;width:100%;height:302px;object-fit:cover;border-radius:var(--r)}
+.cmp-item:not(.cmp-item--featured){opacity:.45;pointer-events:auto}
+.cmp-item--featured{width:253px}
+.cmp-item--featured img,.cmp-item--featured video{height:450px}
+.cmp-item--featured{box-shadow:0 8px 40px rgba(0,0,0,.15)}
+
+/* Play overlay (videos only) */
+.cmp-play-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.25);border-radius:var(--r);transition:opacity .2s}
+.cmp-play-btn{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--text);box-shadow:0 4px 16px rgba(0,0,0,.2);line-height:1}
+.cmp-play-overlay:hover .cmp-play-btn{background:#fff;transform:scale(1.08)}
+
+/* Arrows */
+.cmp-arrow{flex-shrink:0;width:44px;height:44px;border-radius:var(--pill);border:1px solid var(--brd2);background:var(--card);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--sec);transition:all .22s var(--ease);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.cmp-arrow:hover{border-color:var(--warm);color:var(--warm);transform:scale(1.07)}
+.cmp-arrow:active{transform:scale(.97)}
+
+/* Info panel */
+.cmp-info{width:220px;flex-shrink:0}
+.cmp-brand{font-family:var(--d);font-size:1.3rem;letter-spacing:-.01em;margin-bottom:12px;line-height:1.2;transition:opacity .25s}
+.cmp-obj{font-family:var(--m);font-size:.84rem;color:var(--sec);line-height:1.75;transition:opacity .25s}
+
+/* Responsive */
+@media(max-width:900px){
+  .campaigns{padding-left:24px;padding-right:24px}
+  .cmp-stage{flex-direction:column;gap:28px}
+  .cmp-info{width:100%;text-align:center}
+  .cmp-track-outer{width:100%}
+}
+@media(max-width:600px){
+  .cmp-item{width:130px}
+  .cmp-item img,.cmp-item video{height:231px}
+  .cmp-item--featured{width:195px}
+  .cmp-item--featured img,.cmp-item--featured video{height:346px}
+}
 
 /* ===== SERVICES ===== */
 .work{padding:100px 40px;background:var(--bg)}
@@ -388,6 +478,9 @@ footer{padding:40px;border-top:1px solid var(--brd);display:flex;justify-content
       <div class="hero-cta">
         <span class="badge"><span class="dot" aria-hidden="true"></span> Disponible en freelance</span>
         <a href="mailto:sonzini.matis@gmail.com" class="btn">Me contacter</a>
+        <a href="https://www.linkedin.com/in/matis-sonzini/" target="_blank" rel="noopener noreferrer" class="btn" style="background:var(--card);color:var(--text);border:1px solid var(--brd2);box-shadow:0 2px 8px rgba(0,0,0,.06);">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15" style="margin-right:7px;flex-shrink:0;vertical-align:middle"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn
+        </a>
       </div>
     </div>
   </div>
@@ -520,6 +613,27 @@ footer{padding:40px;border-top:1px solid var(--brd);display:flex;justify-content
   </div>
 </section>
 
+<!-- ===== CAMPAIGNS ===== -->
+<section class="campaigns sec" id="campaigns">
+  <div class="cmp-inner">
+    <div class="slabel">Campagnes <span class="mk">↘</span></div>
+    <h2 class="cmp-title rv">Des campagnes que vous<br>avez pu <em>voir passer.</em></h2>
+    <div class="cmp-stage rv">
+      <div class="cmp-track-outer">
+        <button class="cmp-arrow" id="cmpPrev" aria-label="Précédent">&#8592;</button>
+        <div class="cmp-track-wrap">
+          <div class="cmp-track" id="cmpTrack"></div>
+        </div>
+        <button class="cmp-arrow" id="cmpNext" aria-label="Suivant">&#8594;</button>
+      </div>
+      <div class="cmp-info">
+        <div class="cmp-brand" id="cmpBrand"></div>
+        <div class="cmp-obj" id="cmpObj"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== SERVICES ===== -->
 <section class="work sec" id="work">
   <div class="slabel">Services <span class="mk">↘</span></div>
@@ -587,6 +701,33 @@ footer{padding:40px;border-top:1px solid var(--brd);display:flex;justify-content
 </div><!-- /#main-content -->
 
 <script>
+// ===== CAMPAIGNS DATA =====
+var campaigns = [
+  // Images
+  {src:'campaigns/bensimon-la-tennis.jpg',   type:'image', brand:'Bensimon',        obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Campagne awareness produit phare.'},
+  {src:'campaigns/bensimon-soldes.jpg',       type:'image', brand:'Bensimon',        obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Campagne soldes conversion.'},
+  {src:'campaigns/bricolage-direct-steiner.jpg', type:'image', brand:'Bricolage Direct', obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Promotion produit électrogène.'},
+  {src:'campaigns/ekoi-city-style.jpg',       type:'image', brand:'Ekoi',            obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lancement casques urbains.'},
+  {src:'campaigns/fitadium.jpg',              type:'image', brand:'Fitadium',         obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Campagne social proof.'},
+  {src:'campaigns/tourtel-twist.jpg',         type:'image', brand:'Tourtel Twist',   obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Collecte avis consommateurs.'},
+  {src:'campaigns/lashile-good-hair.jpg',     type:'image', brand:'Lashilé Beauty',  obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Performance produit capillaire.'},
+  {src:'campaigns/mincidelice.jpg',           type:'image', brand:'Mincidélice',     obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Acquisition nouveaux clients.'},
+  // Vidéos
+  {src:'campaigns/bensimon-video-prix.mp4',           type:'video', brand:'Bensimon',          obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vidéo prix produit.'},
+  {src:'campaigns/bricolage-direct-bbq-1.mp4',        type:'video', brand:'Bricolage Direct',   obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Campagne BBQ été.'},
+  {src:'campaigns/bricolage-direct-bbq-2.mp4',        type:'video', brand:'Bricolage Direct',   obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Variante BBQ créa 2.'},
+  {src:'campaigns/bricolage-direct-top3.mp4',         type:'video', brand:'Bricolage Direct',   obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Top 3 produits saisonniers.'},
+  {src:'campaigns/dr-pierre-ricaud-creme-zoom.mp4',   type:'video', brand:'Dr Pierre Ricaud',  obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Zoom produit crème.'},
+  {src:'campaigns/ekoi-city-style.mp4',               type:'video', brand:'Ekoi',               obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vidéo lancement urbain.'},
+  {src:'campaigns/ekoi-cofidis.mp4',                  type:'video', brand:'Ekoi',               obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Partenariat financement.'},
+  {src:'campaigns/lyly-et-oli-sapin-noel.mp4',        type:'video', brand:'Lyly & Oli',         obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Campagne Noël.'},
+  {src:'campaigns/mincidelice-regime.mp4',            type:'video', brand:'Mincidélice',        obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vidéo régime performance.'},
+  {src:'campaigns/pierre-ricaud-sonia.mp4',           type:'video', brand:'Dr Pierre Ricaud',  obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Témoignage Sonia.'},
+  {src:'campaigns/simone-perele-pre-soldes.mp4',      type:'video', brand:'Simone Pérèle',      obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Teaser pré-soldes.'},
+  {src:'campaigns/simone-perele-soldes.mp4',          type:'video', brand:'Simone Pérèle',      obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Campagne soldes lingerie.'},
+  {src:'campaigns/pmu-crea.mp4',                      type:'video', brand:'PMU',                obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Créa publicitaire hippique.'}
+];
+
 // Clock
 !function(){var el=document.getElementById('clock');function u(){if(!el)return;el.textContent=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:'Europe/Paris'})+' - Lyon, FR'}u();setInterval(u,1000)}();
 // Scroll reveal
@@ -613,7 +754,7 @@ document.querySelectorAll('.rv').forEach(function(el){o.observe(el)})}();
   var wordIndex = 0;
   var progress = 0;
   var startTime = null;
-  var duration = 2700;
+  var duration = 1600;
   var onCompleteFired = false;
 
   // Word cycling every 900ms, stops at last word
@@ -662,6 +803,152 @@ document.querySelectorAll('.rv').forEach(function(el){o.observe(el)})}();
     }
   }
   requestAnimationFrame(tick);
+}();
+
+// ===== CAMPAIGNS CAROUSEL (infinite + shuffled) =====
+!function(){
+  var track = document.getElementById('cmpTrack');
+  if(!track) return;
+  var brandEl = document.getElementById('cmpBrand');
+  var objEl   = document.getElementById('cmpObj');
+
+  // Fisher-Yates shuffle
+  function shuffle(arr){
+    var a = arr.slice();
+    for(var i = a.length-1; i > 0; i--){
+      var j = Math.floor(Math.random()*(i+1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  var N  = campaigns.length; // 21
+  var NC = 4;                // clones each side
+  var shuffled = shuffle(campaigns);
+
+  // renderOrder: [last NC] + [all N] + [first NC]
+  var renderOrder = [];
+  for(var k = N-NC; k < N; k++) renderOrder.push(shuffled[k]);
+  for(var k = 0;    k < N; k++) renderOrder.push(shuffled[k]);
+  for(var k = 0;    k < NC; k++) renderOrder.push(shuffled[k]);
+
+  var allItems   = [];
+  var vIdx       = NC; // virtual index — starts at first real item
+  var transiting = false;
+
+  // Build DOM for each position in renderOrder
+  renderOrder.forEach(function(c, i){
+    var el = document.createElement('div');
+    el.className = 'cmp-item';
+
+    if(c.type === 'video'){
+      var vid = document.createElement('video');
+      vid.src = c.src;
+      vid.preload = 'metadata';
+      vid.playsInline = true;
+      vid.style.pointerEvents = 'none';
+      el.appendChild(vid);
+      var overlay = document.createElement('div');
+      overlay.className = 'cmp-play-overlay';
+      overlay.innerHTML = '<div class="cmp-play-btn">&#9654;</div>';
+      (function(v, ov){
+        ov.addEventListener('click', function(e){
+          e.stopPropagation();
+          v.controls = true;
+          ov.style.opacity = '0';
+          ov.style.pointerEvents = 'none';
+          v.style.pointerEvents = 'auto';
+          v.play();
+        });
+      })(vid, overlay);
+      el.appendChild(overlay);
+    } else {
+      var img = document.createElement('img');
+      img.src = c.src;
+      img.alt = c.brand;
+      img.loading = 'lazy';
+      el.appendChild(img);
+    }
+
+    (function(pos){ el.addEventListener('click', function(){ cmpGoto(pos); }); })(i);
+    track.appendChild(el);
+    allItems.push(el);
+  });
+
+  function cmpGoto(newVIdx, animate){
+    if(transiting && animate !== false) return;
+    if(animate === undefined) animate = true;
+    vIdx = newVIdx;
+
+    // Pause all videos, reset overlays
+    allItems.forEach(function(el){
+      var v = el.querySelector('video');
+      if(v){ v.pause(); v.controls = false; v.style.pointerEvents = 'none'; }
+      var ov = el.querySelector('.cmp-play-overlay');
+      if(ov){ ov.style.opacity = ''; ov.style.pointerEvents = ''; }
+    });
+
+    // Featured class
+    allItems.forEach(function(el, i){ el.classList.toggle('cmp-item--featured', i === vIdx); });
+
+    // Force reflow then center
+    track.offsetHeight;
+    var wrap  = track.parentElement;
+    var feat  = allItems[vIdx];
+    var tx    = Math.round(wrap.offsetWidth/2 - feat.offsetLeft - feat.offsetWidth/2);
+    track.style.transition = animate ? 'transform .35s cubic-bezier(.25,.46,.45,.94)' : 'none';
+    track.style.transform  = 'translateX('+tx+'px)';
+
+    // Info panel (renderOrder carries the data for clones too)
+    var data = renderOrder[vIdx];
+    brandEl.textContent = data.brand;
+    objEl.textContent   = data.obj;
+
+    // After transition: snap back to real item if we landed in clone zone
+    if(animate){
+      transiting = true;
+      setTimeout(function(){
+        var snapped = false;
+        if(vIdx < NC)      { vIdx += N; snapped = true; }
+        else if(vIdx >= NC+N){ vIdx -= N; snapped = true; }
+        if(snapped){
+          allItems.forEach(function(el,i){ el.classList.toggle('cmp-item--featured', i===vIdx); });
+          track.offsetHeight;
+          var f2  = allItems[vIdx];
+          var tx2 = Math.round(wrap.offsetWidth/2 - f2.offsetLeft - f2.offsetWidth/2);
+          track.style.transition = 'none';
+          track.style.transform  = 'translateX('+tx2+'px)';
+        }
+        transiting = false;
+      }, 380);
+    }
+  }
+
+  // Arrows
+  var prev = document.getElementById('cmpPrev');
+  var next = document.getElementById('cmpNext');
+  if(prev) prev.addEventListener('click', function(){ cmpGoto(vIdx-1); });
+  if(next) next.addEventListener('click', function(){ cmpGoto(vIdx+1); });
+
+  // Keyboard (only when section visible)
+  document.addEventListener('keydown', function(e){
+    var sec = document.getElementById('campaigns');
+    if(!sec) return;
+    var r = sec.getBoundingClientRect();
+    if(r.bottom < 0 || r.top > window.innerHeight) return;
+    if(e.key === 'ArrowLeft')  cmpGoto(vIdx-1);
+    if(e.key === 'ArrowRight') cmpGoto(vIdx+1);
+  });
+
+  // Resize: recentre without animation
+  var resizeT;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeT);
+    resizeT = setTimeout(function(){ cmpGoto(vIdx, false); }, 150);
+  });
+
+  // Init at first real item
+  cmpGoto(NC, false);
 }();
 
 // ===== CURSOR TRAIL =====
