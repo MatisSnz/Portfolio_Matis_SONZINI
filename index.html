@@ -257,6 +257,14 @@ strong{font-weight:700;color:var(--text)}
 .cmp-play-btn{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--text);box-shadow:0 4px 16px rgba(0,0,0,.2);line-height:1}
 .cmp-play-overlay:hover .cmp-play-btn{background:#fff;transform:scale(1.08)}
 
+/* Custom video control bar */
+.cmp-ctrl{position:absolute;bottom:0;left:0;right:0;padding:0 10px 10px;background:linear-gradient(transparent,rgba(0,0,0,.55));border-radius:0 0 var(--r) var(--r);display:flex;align-items:center;gap:10px;opacity:0;transition:opacity .2s;pointer-events:none}
+.cmp-ctrl.active{opacity:1;pointer-events:auto}
+.cmp-ctrl-prog{flex:1;height:3px;background:rgba(255,255,255,.25);border-radius:2px;cursor:pointer;overflow:hidden}
+.cmp-ctrl-fill{height:100%;width:0%;background:#fff;border-radius:2px;pointer-events:none;transition:width .1s linear}
+.cmp-ctrl-mute{background:none;border:none;color:#fff;cursor:pointer;font-size:.8rem;line-height:1;padding:0;display:flex;align-items:center;justify-content:center;opacity:.8;flex-shrink:0}
+.cmp-ctrl-mute:hover{opacity:1}
+
 /* Arrows */
 .cmp-arrow{flex-shrink:0;width:44px;height:44px;border-radius:var(--pill);border:1px solid var(--brd2);background:var(--card);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--sec);transition:all .22s var(--ease);box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .cmp-arrow:hover{border-color:var(--warm);color:var(--warm);transform:scale(1.07)}
@@ -715,7 +723,6 @@ var campaigns = [
   // Vidéos
   {src:'campaigns/bensimon-video-prix.mp4',           type:'video', brand:'Bensimon',          obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vidéo prix produit.'},
   {src:'campaigns/bricolage-direct-bbq-1.mp4',        type:'video', brand:'Bricolage Direct',   obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Campagne BBQ été.'},
-  {src:'campaigns/bricolage-direct-bbq-2.mp4',        type:'video', brand:'Bricolage Direct',   obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Variante BBQ créa 2.'},
   {src:'campaigns/bricolage-direct-top3.mp4',         type:'video', brand:'Bricolage Direct',   obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Top 3 produits saisonniers.'},
   {src:'campaigns/dr-pierre-ricaud-creme-zoom.mp4',   type:'video', brand:'Dr Pierre Ricaud',  obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Zoom produit crème.'},
   {src:'campaigns/ekoi-city-style.mp4',               type:'video', brand:'Ekoi',               obj:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vidéo lancement urbain.'},
@@ -812,7 +819,6 @@ document.querySelectorAll('.rv').forEach(function(el){o.observe(el)})}();
   var brandEl = document.getElementById('cmpBrand');
   var objEl   = document.getElementById('cmpObj');
 
-  // Fisher-Yates shuffle
   function shuffle(arr){
     var a = arr.slice();
     for(var i = a.length-1; i > 0; i--){
@@ -822,21 +828,22 @@ document.querySelectorAll('.rv').forEach(function(el){o.observe(el)})}();
     return a;
   }
 
-  var N  = campaigns.length; // 21
-  var NC = 4;                // clones each side
+  var N  = campaigns.length;
+  var NC = 4;
   var shuffled = shuffle(campaigns);
 
-  // renderOrder: [last NC] + [all N] + [first NC]
   var renderOrder = [];
   for(var k = N-NC; k < N; k++) renderOrder.push(shuffled[k]);
   for(var k = 0;    k < N; k++) renderOrder.push(shuffled[k]);
   for(var k = 0;    k < NC; k++) renderOrder.push(shuffled[k]);
 
   var allItems   = [];
-  var vIdx       = NC; // virtual index — starts at first real item
+  var vIdx       = NC;
   var transiting = false;
+  var autoTimer  = null;
 
-  // Build DOM for each position in renderOrder
+  function clearAuto(){ clearTimeout(autoTimer); autoTimer = null; }
+
   renderOrder.forEach(function(c, i){
     var el = document.createElement('div');
     el.className = 'cmp-item';
@@ -846,22 +853,65 @@ document.querySelectorAll('.rv').forEach(function(el){o.observe(el)})}();
       vid.src = c.src;
       vid.preload = 'metadata';
       vid.playsInline = true;
+      vid.volume = 0.3;
       vid.style.pointerEvents = 'none';
       el.appendChild(vid);
+
+      // Custom control bar
+      var ctrl = document.createElement('div');
+      ctrl.className = 'cmp-ctrl';
+      var prog = document.createElement('div');
+      prog.className = 'cmp-ctrl-prog';
+      var fill = document.createElement('div');
+      fill.className = 'cmp-ctrl-fill';
+      prog.appendChild(fill);
+      var muteBtn = document.createElement('button');
+      muteBtn.className = 'cmp-ctrl-mute';
+      muteBtn.innerHTML = '&#128266;';
+      muteBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        vid.muted = !vid.muted;
+        muteBtn.innerHTML = vid.muted ? '&#128263;' : '&#128266;';
+      });
+      ctrl.appendChild(prog);
+      ctrl.appendChild(muteBtn);
+      el.appendChild(ctrl);
+
+      vid.addEventListener('timeupdate', function(){
+        if(vid.duration) fill.style.width = (vid.currentTime / vid.duration * 100) + '%';
+      });
+      prog.addEventListener('click', function(e){
+        e.stopPropagation();
+        if(vid.duration) vid.currentTime = (e.offsetX / prog.offsetWidth) * vid.duration;
+      });
+
       var overlay = document.createElement('div');
       overlay.className = 'cmp-play-overlay';
       overlay.innerHTML = '<div class="cmp-play-btn">&#9654;</div>';
-      (function(v, ov){
+      (function(v, ov, ct){
         ov.addEventListener('click', function(e){
           e.stopPropagation();
-          v.controls = true;
           ov.style.opacity = '0';
           ov.style.pointerEvents = 'none';
           v.style.pointerEvents = 'auto';
+          ct.classList.add('active');
+          clearAuto();
           v.play();
         });
-      })(vid, overlay);
+        v.addEventListener('click', function(){
+          if(v.paused) v.play(); else v.pause();
+        });
+        v.addEventListener('ended', function(){
+          ct.classList.remove('active');
+          ov.style.opacity = '';
+          ov.style.pointerEvents = '';
+          v.style.pointerEvents = 'none';
+          fill.style.width = '0%';
+          cmpGoto(vIdx + 1);
+        });
+      })(vid, overlay, ctrl);
       el.appendChild(overlay);
+
     } else {
       var img = document.createElement('img');
       img.src = c.src;
@@ -879,75 +929,74 @@ document.querySelectorAll('.rv').forEach(function(el){o.observe(el)})}();
     if(transiting && animate !== false) return;
     if(animate === undefined) animate = true;
     vIdx = newVIdx;
+    clearAuto();
 
-    // Pause all videos, reset overlays
     allItems.forEach(function(el){
       var v = el.querySelector('video');
-      if(v){ v.pause(); v.controls = false; v.style.pointerEvents = 'none'; }
+      if(v){ v.pause(); v.style.pointerEvents = 'none'; }
       var ov = el.querySelector('.cmp-play-overlay');
       if(ov){ ov.style.opacity = ''; ov.style.pointerEvents = ''; }
+      var ct = el.querySelector('.cmp-ctrl');
+      if(ct) ct.classList.remove('active');
     });
 
-    // Featured class
     allItems.forEach(function(el, i){ el.classList.toggle('cmp-item--featured', i === vIdx); });
 
-    // Force reflow then center
     track.offsetHeight;
-    var wrap  = track.parentElement;
-    var feat  = allItems[vIdx];
-    var tx    = Math.round(wrap.offsetWidth/2 - feat.offsetLeft - feat.offsetWidth/2);
+    var wrap = track.parentElement;
+    var feat = allItems[vIdx];
+    var tx   = Math.round(wrap.offsetWidth / 2 - feat.offsetLeft - feat.offsetWidth / 2);
     track.style.transition = animate ? 'transform .35s cubic-bezier(.25,.46,.45,.94)' : 'none';
-    track.style.transform  = 'translateX('+tx+'px)';
+    track.style.transform  = 'translateX(' + tx + 'px)';
 
-    // Info panel (renderOrder carries the data for clones too)
     var data = renderOrder[vIdx];
     brandEl.textContent = data.brand;
     objEl.textContent   = data.obj;
 
-    // After transition: snap back to real item if we landed in clone zone
+    // Auto-advance images after 4s
+    if(data.type === 'image'){
+      autoTimer = setTimeout(function(){ cmpGoto(vIdx + 1); }, 4000);
+    }
+
     if(animate){
       transiting = true;
       setTimeout(function(){
         var snapped = false;
-        if(vIdx < NC)      { vIdx += N; snapped = true; }
+        if(vIdx < NC)        { vIdx += N; snapped = true; }
         else if(vIdx >= NC+N){ vIdx -= N; snapped = true; }
         if(snapped){
-          allItems.forEach(function(el,i){ el.classList.toggle('cmp-item--featured', i===vIdx); });
+          allItems.forEach(function(el, i){ el.classList.toggle('cmp-item--featured', i === vIdx); });
           track.offsetHeight;
           var f2  = allItems[vIdx];
-          var tx2 = Math.round(wrap.offsetWidth/2 - f2.offsetLeft - f2.offsetWidth/2);
+          var tx2 = Math.round(wrap.offsetWidth / 2 - f2.offsetLeft - f2.offsetWidth / 2);
           track.style.transition = 'none';
-          track.style.transform  = 'translateX('+tx2+'px)';
+          track.style.transform  = 'translateX(' + tx2 + 'px)';
         }
         transiting = false;
       }, 380);
     }
   }
 
-  // Arrows
   var prev = document.getElementById('cmpPrev');
   var next = document.getElementById('cmpNext');
-  if(prev) prev.addEventListener('click', function(){ cmpGoto(vIdx-1); });
-  if(next) next.addEventListener('click', function(){ cmpGoto(vIdx+1); });
+  if(prev) prev.addEventListener('click', function(){ cmpGoto(vIdx - 1); });
+  if(next) next.addEventListener('click', function(){ cmpGoto(vIdx + 1); });
 
-  // Keyboard (only when section visible)
   document.addEventListener('keydown', function(e){
     var sec = document.getElementById('campaigns');
     if(!sec) return;
     var r = sec.getBoundingClientRect();
     if(r.bottom < 0 || r.top > window.innerHeight) return;
-    if(e.key === 'ArrowLeft')  cmpGoto(vIdx-1);
-    if(e.key === 'ArrowRight') cmpGoto(vIdx+1);
+    if(e.key === 'ArrowLeft')  cmpGoto(vIdx - 1);
+    if(e.key === 'ArrowRight') cmpGoto(vIdx + 1);
   });
 
-  // Resize: recentre without animation
   var resizeT;
   window.addEventListener('resize', function(){
     clearTimeout(resizeT);
     resizeT = setTimeout(function(){ cmpGoto(vIdx, false); }, 150);
   });
 
-  // Init at first real item
   cmpGoto(NC, false);
 }();
 
