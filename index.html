@@ -235,8 +235,11 @@ strong{font-weight:700;color:var(--text)}
 /* ===== CAMPAIGNS ===== */
 .campaigns{padding:100px 40px;background:var(--bg2);position:relative;overflow:hidden}
 .cmp-inner{max-width:1100px;margin:0 auto}
-.cmp-title{font-family:var(--d);font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.2;letter-spacing:-.02em;margin-bottom:48px}
+.cmp-title-row{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:48px}
+.cmp-title{font-family:var(--d);font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.2;letter-spacing:-.02em;margin-bottom:0}
 .cmp-title em{font-style:italic;color:var(--warm)}
+.cmp-wip{display:inline-flex;align-items:center;gap:6px;font-family:var(--m);font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;background:rgba(232,93,42,.08);color:var(--warm);border:1px solid rgba(232,93,42,.25);padding:5px 12px;border-radius:var(--pill);white-space:nowrap;margin-top:6px;flex-shrink:0}
+.cmp-wip::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--warm);animation:pulse 2s infinite;flex-shrink:0}
 
 /* Stage = track area + info panel */
 .cmp-stage{display:flex;align-items:center;gap:40px}
@@ -625,7 +628,10 @@ footer{padding:40px;border-top:1px solid var(--brd);display:flex;justify-content
 <section class="campaigns sec" id="campaigns">
   <div class="cmp-inner">
     <div class="slabel">Campagnes <span class="mk">↘</span></div>
-    <h2 class="cmp-title rv">Des campagnes que vous<br>avez pu <em>voir passer.</em></h2>
+    <div class="cmp-title-row rv">
+      <h2 class="cmp-title">Des campagnes que vous<br>avez pu <em>voir passer.</em></h2>
+      <span class="cmp-wip">Work in progress</span>
+    </div>
     <div class="cmp-stage rv">
       <div class="cmp-track-outer">
         <button class="cmp-arrow" id="cmpPrev" aria-label="Précédent">&#8592;</button>
