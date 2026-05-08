@@ -19,7 +19,7 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Matis Sonzini — Consultant Paid Social & Creative Strategy">
+<meta name="twitter:title" content="Matis Sonzini - Consultant Paid Social & Creative Strategy">
 <meta name="twitter:description" content="Spécialiste Meta Ads, TikTok Ads et stratégie créative. +25 marques, +3M€ budgets gérés. Basé à Lyon.">
 
 <!-- JSON-LD Schema -->
@@ -85,8 +85,23 @@ a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 strong{font-weight:700;color:var(--text)}
 
 /* ===== FLOATING CTA ===== */
-.float-cta{position:fixed;top:20px;left:20px;z-index:1000;display:inline-flex;align-items:center;gap:10px;font-family:var(--m);font-size:.7rem;letter-spacing:.04em;color:var(--text);text-decoration:none;background:rgba(255,255,255,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--brd);padding:10px 22px;border-radius:var(--pill);transition:all .25s var(--ease);box-shadow:0 2px 16px rgba(0,0,0,.06);min-height:44px}
+.float-cta{position:fixed;top:20px;left:20px;z-index:1000;display:inline-flex;align-items:center;gap:10px;font-family:var(--m);font-size:.7rem;letter-spacing:.04em;color:var(--text);text-decoration:none;background:rgba(255,255,255,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--brd);padding:10px 22px;border-radius:var(--pill);transition:all .25s var(--ease);box-shadow:0 2px 16px rgba(0,0,0,.06);min-height:44px;overflow:hidden}
 .float-cta:hover{background:var(--text);color:#fff;box-shadow:0 6px 24px rgba(0,0,0,.12);transform:translateY(-1px)}
+.float-cta::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(232,93,42,.18) 50%,transparent 70%);transform:translateX(-180%);pointer-events:none;border-radius:inherit}
+.float-cta--shimmer::after{animation:ctaShimmer .7s cubic-bezier(.25,.46,.45,.94) forwards}
+@keyframes ctaShimmer{from{transform:translateX(-180%)}to{transform:translateX(260%)}}
+
+/* ===== macOS NOTIFICATION ===== */
+.macos-notif{position:fixed;top:20px;right:20px;z-index:9997;width:320px;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(0,0,0,.08);border-radius:14px;padding:14px 16px;box-shadow:0 8px 32px rgba(0,0,0,.18),0 2px 8px rgba(0,0,0,.06);display:flex;gap:12px;align-items:flex-start;cursor:pointer;text-decoration:none;transform:translateX(370px);opacity:0;transition:transform .42s cubic-bezier(.25,.46,.45,.94),opacity .42s ease}
+.macos-notif.is-visible{transform:translateX(0);opacity:1}
+.macos-notif.is-hiding{transform:translateX(370px);opacity:0}
+.macos-notif-icon{width:36px;height:36px;border-radius:8px;background:var(--warm);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff}
+.macos-notif-body{flex:1;min-width:0}
+.macos-notif-app{font-family:var(--m);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--tri);margin-bottom:3px}
+.macos-notif-title{font-family:var(--b);font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:4px}
+.macos-notif-msg{font-family:var(--m);font-size:.74rem;color:var(--sec);line-height:1.5}
+.macos-notif-close{width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.08);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.55rem;color:var(--sec);flex-shrink:0;padding:0;transition:background .2s;line-height:1}
+.macos-notif-close:hover{background:rgba(0,0,0,.18)}
 .float-cta svg{width:16px;height:16px;flex-shrink:0}
 
 /* ===== HERO ===== */
@@ -247,6 +262,15 @@ strong{font-weight:700;color:var(--text)}
 .bc-body p{font-size:.95rem;color:var(--sec);line-height:1.85;margin-bottom:16px}
 .bc-body p:last-child{margin-bottom:0}
 
+/* ===== BRIDGE MÉTHODO → CAMPAGNES ===== */
+.bridge{padding:80px 40px;text-align:center;background:var(--bg);border-top:1px solid var(--brd);position:relative;overflow:hidden}
+.bridge::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(232,93,42,.06) 0%,transparent 60%);pointer-events:none}
+.bridge-label{font-family:var(--m);font-size:.68rem;text-transform:uppercase;letter-spacing:.18em;color:var(--tri);margin-bottom:20px}
+.bridge-phrase{font-family:var(--d);font-size:clamp(1.8rem,4vw,3rem);line-height:1.2;letter-spacing:-.02em;color:var(--text);margin-bottom:0}
+.bridge-phrase em{font-style:italic;color:var(--warm)}
+.bridge-arrow{display:block;font-size:1.4rem;color:var(--warm);margin-top:28px;animation:bridgeFloat 2s ease-in-out infinite}
+@keyframes bridgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
 /* ===== CAMPAIGNS ===== */
 .campaigns{padding:100px 40px;background:var(--bg2);position:relative;overflow:hidden}
 .cmp-inner{max-width:1100px;margin:0 auto}
@@ -307,21 +331,39 @@ strong{font-weight:700;color:var(--text)}
   .cmp-item--featured img,.cmp-item--featured video{height:346px}
 }
 
-/* ===== SERVICES ===== */
+/* ===== OFFRES ===== */
 .work{padding:100px 40px;background:var(--bg)}
-.wk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:1400px;margin:0 auto}
-.wk-card{background:var(--card);border:1px solid var(--brd);border-radius:var(--r);overflow:hidden;transition:all .35s var(--ease)}
-.wk-card:hover{border-color:var(--brd2);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,.06)}
-.wk-vis{height:190px;display:flex;align-items:center;justify-content:center}
-.wk-ic{width:48px;height:48px;color:rgba(255,255,255,.9);filter:drop-shadow(0 3px 12px rgba(0,0,0,.2))}
-.wk-body{padding:24px 24px 28px}
-.wk-label{font-family:var(--m);font-size:.64rem;text-transform:uppercase;letter-spacing:.12em;color:var(--warm);margin-bottom:6px}
-.wk-card h3{font-family:var(--d);font-size:1.35rem;margin-bottom:6px}
-.wk-card p{font-size:.84rem;color:var(--sec);line-height:1.65}
-.v-meta{background:linear-gradient(135deg,#a2d2ff 0%,#4361ee 100%)}
-.v-tik{background:linear-gradient(135deg,#1a1a2e 0%,#25f4ee 50%,#fe2c55 100%)}
-.v-crea{background:linear-gradient(135deg,#ffd6a5 0%,#e85d2a 50%,#7c4dff 100%)}
-.v-strat{background:linear-gradient(135deg,#b8e0d2 0%,#22a35a 100%)}
+.ofr-layout{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+/* Hero offer */
+.ofr-hero{background:oklch(99% .008 40);border:1px solid rgba(232,93,42,.2);border-radius:var(--r);padding:52px 56px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;position:relative;overflow:hidden}
+.ofr-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--warm);border-radius:var(--r) var(--r) 0 0}
+.ofr-hero::after{content:'';position:absolute;bottom:0;right:0;width:320px;height:320px;background:radial-gradient(circle at 100% 100%,rgba(232,93,42,.07) 0%,transparent 60%);pointer-events:none}
+.ofr-badge{display:inline-block;font-family:var(--m);font-size:.6rem;text-transform:uppercase;letter-spacing:.14em;color:var(--warm);background:rgba(232,93,42,.1);padding:5px 14px;border-radius:var(--pill);margin-bottom:20px}
+.ofr-hero h3{font-family:var(--d);font-size:clamp(1.6rem,2.5vw,2.2rem);line-height:1.1;letter-spacing:-.02em;margin-bottom:16px}
+.ofr-hero-pitch{font-size:.95rem;color:var(--sec);line-height:1.8;margin-bottom:24px;max-width:46ch}
+.ofr-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:32px}
+.ofr-tag{font-family:var(--m);font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;background:rgba(67,97,238,.06);color:var(--blue);padding:4px 12px;border-radius:var(--pill);border:1px solid rgba(67,97,238,.12)}
+.ofr-dl-label{font-family:var(--m);font-size:.63rem;text-transform:uppercase;letter-spacing:.14em;color:var(--tri);margin-bottom:16px}
+.ofr-dl{list-style:none;padding:0;display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.ofr-dl li{font-size:.875rem;color:var(--sec);line-height:1.5;padding-left:1.2rem;position:relative}
+.ofr-dl li::before{content:'→';position:absolute;left:0;color:var(--warm);font-size:.72rem;top:.15em;font-family:var(--m)}
+.ofr-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--m);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--warm);font-weight:700;text-decoration:none;transition:gap .2s var(--ease)}
+.ofr-cta:hover{gap:14px}
+.ofr-cta-arrow{font-size:.9rem}
+/* Secondary grid */
+.ofr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ofr-card{background:var(--card);border:1px solid var(--brd);border-radius:var(--r);padding:36px;display:flex;flex-direction:column;transition:border-color .3s var(--ease),box-shadow .3s var(--ease),transform .3s var(--ease)}
+.ofr-card:hover{border-color:var(--brd2);box-shadow:0 10px 36px rgba(0,0,0,.07);transform:translateY(-3px)}
+.ofr-num{font-family:var(--d);font-size:2.8rem;color:rgba(232,93,42,.12);line-height:1;margin-bottom:10px;font-style:italic;letter-spacing:-.03em}
+.ofr-card-badge{font-family:var(--m);font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:var(--tri);margin-bottom:14px}
+.ofr-card h3{font-family:var(--d);font-size:1.2rem;letter-spacing:-.01em;margin-bottom:12px;line-height:1.2}
+.ofr-card-pitch{font-size:.84rem;color:var(--sec);line-height:1.65;margin-bottom:20px}
+.ofr-card .ofr-dl{gap:9px;margin-bottom:28px}
+.ofr-card .ofr-dl li{font-size:.8rem}
+.ofr-card .ofr-cta{margin-top:auto}
+@media(max-width:1100px){.ofr-hero{grid-template-columns:1fr;gap:40px;padding:40px 36px}}
+@media(max-width:900px){.ofr-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.ofr-hero{padding:32px 24px}}
 
 /* ===== TESTIMONIALS ===== */
 .testi{padding:100px 40px;background:var(--grad-warm)}
@@ -368,7 +410,7 @@ footer{padding:40px;border-top:1px solid var(--brd);display:flex;justify-content
   .photo-wrap{width:220px;height:270px}
   .stats{gap:32px}
   .expertise,.clients,.about,.vision,.bestcase,.work,.testi,.contact{padding-left:24px;padding-right:24px}
-  .wk-grid{grid-template-columns:1fr}
+  .ofr-grid{grid-template-columns:1fr}
   .ab-grid{grid-template-columns:1fr;gap:40px}
   .bc-body{padding:28px 24px}
   footer{padding:24px}
@@ -473,7 +515,7 @@ footer{padding:40px;border-top:1px solid var(--brd);display:flex;justify-content
 #main-content.visible{opacity:1}
 
 /* ─── VISION → MÉTHODO HORIZONTAL SLIDE ─── */
-.hslide-trap{position:relative;height:160vh;z-index:1}
+.hslide-trap{position:relative;height:280vh;z-index:1}
 .hslide-stage{position:sticky;top:0;height:100vh;overflow:hidden;border-top:1px solid var(--brd)}
 .hslide-track{display:flex;width:200vw;height:100%;will-change:transform}
 .hslide-panel{width:100vw;height:100%;overflow-y:auto;flex-shrink:0}
@@ -494,7 +536,7 @@ footer{padding:40px;border-top:1px solid var(--brd);display:flex;justify-content
 .crea-list li{font-size:.85rem;color:var(--sec);line-height:1.5;padding-left:1.1rem;position:relative}
 .crea-list li::before{content:'–';position:absolute;left:0;color:var(--warm);font-weight:500}
 .crea-outro{font-size:.92rem;font-weight:600;color:var(--text);font-family:var(--b)}
-.crea-img-zone{width:100%;max-width:840px;aspect-ratio:1;position:relative;border-radius:var(--r);overflow:hidden;background:var(--bg2);border:2px dashed var(--brd2);display:flex;align-items:center;justify-content:center}
+.crea-img-zone{width:90%;max-width:840px;aspect-ratio:1;position:relative;border-radius:var(--r);overflow:hidden;background:var(--bg2);border:2px dashed var(--brd2);display:flex;align-items:center;justify-content:center}
 .crea-img-zone img{width:100%;height:100%;object-fit:contain;display:block}
 .crea-img-ph{font-family:var(--m);font-size:.72rem;color:var(--tri);text-align:center;padding:24px;line-height:1.8;pointer-events:none}
 .crea-img-zone.has-img .crea-img-ph{display:none}
@@ -677,8 +719,8 @@ footer{padding:40px;border-top:1px solid var(--brd);display:flex;justify-content
               </div>
             </div>
             <div class="pins-row">
-              <div class="pin-bubble"><img src="PinsHomme.png" alt="Hugo — Persona sportif" loading="lazy"></div>
-              <div class="pin-bubble"><img src="PinsFemme.png" alt="Catherine — Persona mère active" loading="lazy"></div>
+              <div class="pin-bubble"><img src="PinsHomme.png" alt="Hugo - Persona sportif" loading="lazy"></div>
+              <div class="pin-bubble"><img src="PinsFemme.png" alt="Catherine - Persona mère active" loading="lazy"></div>
             </div>
             <div class="dia-flow">
               <div class="dia-arrow">↓</div>
@@ -711,6 +753,9 @@ footer{padding:40px;border-top:1px solid var(--brd);display:flex;justify-content
               <li>Proposer des visuels de réassurance</li>
             </ul>
             <p class="crea-outro">Voilà la recette pour des campagnes qui performent.</p>
+            <div class="cta-row" style="margin-top:28px">
+              <a href="mailto:sonzini.matis@gmail.com" class="btn btn-warm">On la regarde ensemble ?</a>
+            </div>
           </div>
           <div class="crea-right rv">
             <div class="crea-img-zone">
@@ -725,6 +770,13 @@ footer{padding:40px;border-top:1px solid var(--brd);display:flex;justify-content
 
     </div>
   </div>
+</div>
+
+<!-- ===== BRIDGE MÉTHODO → CAMPAGNES ===== -->
+<div class="bridge">
+  <p class="bridge-label rv">La méthode en action</p>
+  <p class="bridge-phrase rv">Voilà ce que ça <em>donne.</em></p>
+  <span class="bridge-arrow rv" aria-hidden="true">↓</span>
 </div>
 
 <!-- ===== CAMPAIGNS ===== -->
@@ -751,25 +803,89 @@ footer{padding:40px;border-top:1px solid var(--brd);display:flex;justify-content
   </div>
 </section>
 
-<!-- ===== SERVICES ===== -->
+<!-- ===== OFFRES ===== -->
 <section class="work sec" id="work">
-  <div class="slabel">Services <span class="mk">↘</span></div>
-  <div class="wk-grid">
-    <div class="wk-card rv">
-      <div class="wk-vis v-meta"><svg class="wk-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
-      <div class="wk-body"><div class="wk-label">Plateforme principale</div><h3>Meta Ads - Full Funnel</h3><p>Set up, audiences, campagnes perf/brand/conversion. Stratégie créative et optimisation continue.</p></div>
+  <div class="slabel">Ce que je propose <span class="mk">↘</span></div>
+  <div class="ofr-layout">
+
+    <!-- Offre principale -->
+    <div class="ofr-hero rv">
+      <div class="ofr-hero-left">
+        <span class="ofr-badge">Offre principale</span>
+        <h3>Paid Social Ads<br>Full Funnel</h3>
+        <p class="ofr-hero-pitch">Gestion complète de vos campagnes Meta, TikTok, Snapchat, LinkedIn ou Pinterest. De l'audit à l'optimisation continue, avec une stratégie créative intégrée orientée performance et CA.</p>
+        <div class="ofr-tags">
+          <span class="ofr-tag">Meta Ads</span>
+          <span class="ofr-tag">TikTok Ads</span>
+          <span class="ofr-tag">Snapchat Ads</span>
+          <span class="ofr-tag">LinkedIn Ads</span>
+          <span class="ofr-tag">Pinterest Ads</span>
+          <span class="ofr-tag">Reporting</span>
+          <span class="ofr-tag">A/B Testing</span>
+        </div>
+        <a href="mailto:sonzini.matis@gmail.com" class="ofr-cta">Discuter de votre projet <span class="ofr-cta-arrow">→</span></a>
+      </div>
+      <div class="ofr-hero-right">
+        <p class="ofr-dl-label">Ce que vous obtenez</p>
+        <ul class="ofr-dl">
+          <li>Audit de compte et recommandations stratégiques</li>
+          <li>Stratégie d'audiences, segmentation et ciblage par persona</li>
+          <li>Création et gestion des campagnes (trafic, conversion, lead, notoriété)</li>
+          <li>Stratégie créative : hooks, angles publicitaires, briefs visuels</li>
+          <li>Optimisation continue basée sur la data (ROAS, CPA, CTR)</li>
+          <li>Reporting hebdomadaire clair et orienté décision</li>
+        </ul>
+      </div>
     </div>
-    <div class="wk-card rv">
-      <div class="wk-vis v-tik"><svg class="wk-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-      <div class="wk-body"><div class="wk-label">Social émergent</div><h3>TikTok &amp; Snapchat Ads</h3><p>Campagnes natives, formats Story et In-Feed, hooks adaptés au scroll rapide.</p></div>
-    </div>
-    <div class="wk-card rv">
-      <div class="wk-vis v-crea"><svg class="wk-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
-      <div class="wk-body"><div class="wk-label">Conseil créatif</div><h3>Audit &amp; Stratégie Créative</h3><p>Analyse de persona, hooks, angles et scénarios. Visuels optimisés pour chaque objectif.</p></div>
-    </div>
-    <div class="wk-card rv">
-      <div class="wk-vis v-strat"><svg class="wk-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-      <div class="wk-body"><div class="wk-label">Recommandation globale</div><h3>Stratégie Cross-Canal</h3><p>Social, SEO, programmatique, affiliation, DOOH. Vision 360° pour votre acquisition.</p></div>
+
+    <!-- 3 offres secondaires -->
+    <div class="ofr-grid">
+
+      <div class="ofr-card rv">
+        <div class="ofr-num">02</div>
+        <div class="ofr-card-badge">Conseil créatif</div>
+        <h3>Audit &amp; Stratégie Créative</h3>
+        <p class="ofr-card-pitch">Construire des créas qui convertissent vraiment. Analyse personas, identification des points de douleur, recommandations de hooks et angles différenciés par segment.</p>
+        <ul class="ofr-dl">
+          <li>Analyse des personas et motivations (SONCASE)</li>
+          <li>Identification des points de douleur et freins</li>
+          <li>Recommandations de hooks et angles par segment</li>
+          <li>Scénarios vidéo et briefs créatifs</li>
+          <li>Benchmark concurrentiel créatif</li>
+        </ul>
+        <a href="mailto:sonzini.matis@gmail.com" class="ofr-cta">Me contacter <span class="ofr-cta-arrow">→</span></a>
+      </div>
+
+      <div class="ofr-card rv">
+        <div class="ofr-num">03</div>
+        <div class="ofr-card-badge">Data &amp; Performance</div>
+        <h3>Pilotage &amp; Reporting</h3>
+        <p class="ofr-card-pitch">Analyse des KPIs, construction de dashboards lisibles, recommandations basées sur la data. Chaque euro investi doit travailler et être justifiable.</p>
+        <ul class="ofr-dl">
+          <li>Définition des KPIs et objectifs par campagne</li>
+          <li>Dashboards Looker Studio / Catchr</li>
+          <li>Reporting hebdo ou mensuel orienté CA</li>
+          <li>Analyse des cohortes et attribution</li>
+          <li>Recommandations d'optimisation budgétaire</li>
+        </ul>
+        <a href="mailto:sonzini.matis@gmail.com" class="ofr-cta">Me contacter <span class="ofr-cta-arrow">→</span></a>
+      </div>
+
+      <div class="ofr-card rv">
+        <div class="ofr-num">04</div>
+        <div class="ofr-card-badge">Vision globale</div>
+        <h3>Stratégie Cross-Canal</h3>
+        <p class="ofr-card-pitch">Au-delà du social. Recommandations multi-leviers pour une acquisition cohérente : SEO, programmatique, affiliation, DOOH. Vision 360° alignée sur vos objectifs business.</p>
+        <ul class="ofr-dl">
+          <li>Audit cross-canal et cartographie des leviers</li>
+          <li>Recommandations d'investissement par canal</li>
+          <li>Coordination programmatique et DOOH</li>
+          <li>Intégration SEO/GEO dans la stratégie globale</li>
+          <li>Plan d'action priorisé et chiffré</li>
+        </ul>
+        <a href="mailto:sonzini.matis@gmail.com" class="ofr-cta">Me contacter <span class="ofr-cta-arrow">→</span></a>
+      </div>
+
     </div>
   </div>
 </section>
@@ -807,7 +923,7 @@ footer{padding:40px;border-top:1px solid var(--brd);display:flex;justify-content
 </main>
 
 <footer>
-  <div class="ft-left">© 2026 Matis Sonzini</div>
+  <div class="ft-left">© 2026 Matis Sonzini - Site conçu et développé par <strong style="color:var(--text)">Matis Sonzini</strong></div>
   <div class="ft-links">
     <a href="https://www.linkedin.com/in/matis-sonzini/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     <a href="mailto:sonzini.matis@gmail.com">Email</a>
@@ -1321,6 +1437,29 @@ document.querySelectorAll('.rv').forEach(function(el){o.observe(el)})}();
   // Reposition after fonts/images load
   window.addEventListener('load',posLogos);
 
+// ===== FLOAT CTA SHIMMER SWEEP =====
+!function(){
+  var cta=document.querySelector('.float-cta');
+  if(!cta)return;
+  function shimmer(){
+    cta.classList.remove('float-cta--shimmer');
+    void cta.offsetWidth;
+    cta.classList.add('float-cta--shimmer');
+    setTimeout(function(){cta.classList.remove('float-cta--shimmer');},750);
+  }
+  var targets=[
+    document.querySelector('.about'),
+    document.querySelector('.hslide-trap'),
+    document.querySelector('.testi')
+  ].filter(Boolean);
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting&&e.boundingClientRect.bottom<window.innerHeight) shimmer();
+    });
+  },{threshold:0,rootMargin:'150px 0px 0px 0px'});
+  targets.forEach(function(t){obs.observe(t);});
+}();
+
 // ===== VISION → MÉTHODO HORIZONTAL SLIDE =====
 !function(){
   var trap=document.querySelector('.hslide-trap');
@@ -1332,7 +1471,7 @@ document.querySelectorAll('.rv').forEach(function(el){o.observe(el)})}();
   // Phase 1 (0-30%): read Vision
   // Phase 2 (30-70%): slide from Vision to Méthodo
   // Phase 3 (70-100%): read Méthodo
-  var S=0.44,E=0.56;
+  var S=0.10,E=0.90;
   function update(){
     if(isMobile()){track.style.transform='';ticking=false;return;}
     var r=trap.getBoundingClientRect();
@@ -1340,7 +1479,7 @@ document.querySelectorAll('.rv').forEach(function(el){o.observe(el)})}();
     var total=trap.offsetHeight-window.innerHeight;
     var p=Math.max(0,Math.min(1,scrolled/total));
     var sp=Math.max(0,Math.min(1,(p-S)/(E-S)));
-    var e=sp*sp*(3-2*sp); // smoothstep
+    var e=sp*sp*sp*(sp*(sp*6-15)+10); // smootherstep
     track.style.transform='translateX('+(-e*100)+'vw)';
     ticking=false;
   }
@@ -1361,6 +1500,50 @@ document.querySelectorAll('.rv').forEach(function(el){o.observe(el)})}();
   },{threshold:0.35,rootMargin:'0px 0px -60px 0px'});
 
   logos.forEach(function(l){obs.observe(l);});
+}();
+
+// ===== macOS CAMPAIGNS NOTIFICATION =====
+!function(){
+  var shown=false,timer=null,notif=null;
+  function hide(){
+    if(!notif)return;
+    notif.classList.remove('is-visible');
+    notif.classList.add('is-hiding');
+    setTimeout(function(){if(notif&&notif.parentNode)notif.parentNode.removeChild(notif);notif=null;},460);
+  }
+  function show(){
+    if(shown)return;
+    shown=true;
+    notif=document.createElement('a');
+    notif.href='mailto:sonzini.matis@gmail.com';
+    notif.className='macos-notif';
+    notif.setAttribute('role','alert');
+    notif.innerHTML=
+      '<div class="macos-notif-icon">'+
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">'+
+          '<path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.15a16 16 0 006.92 6.92l1.52-1.52a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>'+
+        '</svg>'+
+      '</div>'+
+      '<div class="macos-notif-body">'+
+        '<div class="macos-notif-app">Matis Sonzini</div>'+
+        '<div class="macos-notif-title">On travaille ensemble ?</div>'+
+        '<div class="macos-notif-msg">Si vous voulez qu\'on travaille des campagnes similaires, contactez-moi.</div>'+
+      '</div>'+
+      '<button class="macos-notif-close" aria-label="Fermer">✕</button>';
+    document.body.appendChild(notif);
+    requestAnimationFrame(function(){requestAnimationFrame(function(){notif.classList.add('is-visible');});});
+    notif.querySelector('.macos-notif-close').addEventListener('click',function(e){e.preventDefault();e.stopPropagation();hide();});
+    setTimeout(hide,11000);
+  }
+  var cmp=document.querySelector('.campaigns');
+  if(!cmp)return;
+  var cmpObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){timer=setTimeout(show,6000);}
+      else{clearTimeout(timer);timer=null;}
+    });
+  },{threshold:0.25});
+  cmpObs.observe(cmp);
 }();
 
 </script>
