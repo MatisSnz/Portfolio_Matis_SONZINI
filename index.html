@@ -191,10 +191,22 @@ strong{font-weight:700;color:var(--text)}
 .dia-result{background:var(--grad-warm);border-radius:var(--rs);padding:20px;text-align:center;border:1px solid rgba(232,93,42,.1)}
 .dia-result span{font-family:var(--d);font-size:1.1rem;color:var(--warm);font-weight:700}
 
+@keyframes pinFloat{
+  0%,100%{transform:translateY(0) rotate(-2deg)}
+  50%{transform:translateY(-10px) rotate(2deg)}
+}
+@keyframes pinFloatAlt{
+  0%,100%{transform:translateY(-5px) rotate(1.5deg)}
+  50%{transform:translateY(5px) rotate(-1.5deg)}
+}
 .pins-row{display:flex;gap:16px;margin:16px 0 0}
-.pin-bubble{flex:1;position:relative;border-radius:50%;overflow:hidden;border:3px solid rgba(0,0,0,.08);box-shadow:0 6px 24px rgba(0,0,0,.12);background:var(--bg2)}
+.pin-bubble{flex:1;position:relative;border-radius:50%;overflow:hidden;border:3px solid rgba(0,0,0,.08);box-shadow:0 6px 24px rgba(0,0,0,.12);background:var(--bg2);animation:pinFloat 4s ease-in-out infinite;will-change:transform;cursor:pointer;transition:box-shadow .3s var(--ease)}
+.pin-bubble:nth-child(2){animation-name:pinFloatAlt;animation-duration:4.8s}
+.pin-bubble:hover{animation-play-state:paused;box-shadow:0 14px 40px rgba(0,0,0,.2)}
 .pin-bubble::before{content:'';display:block;padding-top:100%}
-.pin-bubble img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pin-bubble img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
+.pin-bubble:hover img{transform:scale(1.06)}
+@media(prefers-reduced-motion:reduce){.pin-bubble{animation:none}}
 
 .stat-bubbles{display:flex;gap:12px;margin-top:20px}
 .sb{flex:1;background:var(--card);border:1px solid var(--brd);border-radius:60px;padding:18px 10px;text-align:center;transition:all .3s var(--ease)}
