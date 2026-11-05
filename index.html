@@ -233,7 +233,7 @@
     <div class="rail-head" data-r>
       <div class="sec-head" style="margin:0">
         <h2 style="max-width:18ch">Des campagnes que vous avez peut-être croisées.</h2>
-        <p class="lead">Survolez une vidéo pour la lancer, cliquez pour l'écouter.</p>
+        <p class="lead">Glissez pour parcourir, survolez une vidéo pour la lancer, cliquez pour l'écouter.</p>
       </div>
       <div class="rail-ctl">
         <button class="rail-btn" id="railPrev" aria-label="Campagnes précédentes"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></button>
@@ -291,7 +291,63 @@
     </div>
 
     <div class="method-bottom">
-      <div class="cycle-card" data-r><img src="assets/cycleperf.webp" width="960" height="960" alt="Le cycle de la performance publicitaire : dosage de la créativité, impact des premières secondes, structure Hook Body Close, angle pub précis, message ciblé, biais cognitifs, lecture mobile-first, test A/B permanent" loading="lazy"></div>
+      <div class="cy" id="cy" data-r>
+        <h3 class="cy-title">Le cycle de la performance publicitaire</h3>
+        <div class="cy-grid">
+          <button type="button" class="cy-l cy-a0" data-i="0" style="--c:#2FBF7A;--t:#D3F5E4;--k:#0B6B45" data-more="Toutes les créas n'ont pas le même rôle : certaines font connaître la marque, d'autres amènent du trafic, d'autres vendent. En les dosant, on évite de répéter le même message à la même audience, ce qui use la marque." data-practice="Un mélange de formats (notoriété, trafic, conversion) plutôt qu'une seule pub diffusée partout."><span class="cy-name"><i class="cy-dot"></i>Dosage de la créativité</span><span class="cy-short">Équilibrer notoriété, trafic et performance pour éviter l'épuisement de marque.</span></button>
+          <button type="button" class="cy-l cy-a1" data-i="1" style="--c:#8DB82F;--t:#E5F3C4;--k:#4A6410" data-more="Sur les réseaux, on décide de rester ou de scroller en un instant. Le début de la créa doit poser tout de suite le sujet, la promesse ou le problème, et rester en mémoire." data-practice="Une accroche visuelle ou une phrase dès la première seconde, pas un logo qui s'anime."><span class="cy-name"><i class="cy-dot"></i>Impact des premières secondes</span><span class="cy-short">Utiliser les premières secondes pour capturer l'attention et l'impact mémoriel.</span></button>
+          <button type="button" class="cy-l cy-a2" data-i="2" style="--c:#E2C20F;--t:#FFF1A8;--k:#6B5600" data-more="Hook, Body, Close : on accroche, on développe l'argument avec une preuve, puis on conclut par une action claire. Une structure simple rend le message facile à suivre, et facile à tester." data-practice="Accroche en 3 secondes, démonstration du problème résolu, appel à l'action à la fin."><span class="cy-name"><i class="cy-dot"></i>Structure de la créativité</span><span class="cy-short">Employer une structure Hook, Body, Close pour une communication efficace.</span></button>
+          <button type="button" class="cy-l cy-a3" data-i="3" style="--c:#E58A2D;--t:#FFE0BF;--k:#8A4A00" data-more="Un angle, c'est la raison précise pour laquelle cette personne devrait s'intéresser au produit. Il se choisit selon le persona : une même offre se raconte autrement à un sportif de 18 ans et à une mère de 50 ans." data-practice="Performance et dépassement pour Hugo, énergie et bien-être pour Catherine."><span class="cy-name"><i class="cy-dot"></i>Angle pub précis</span><span class="cy-short">Choisir un angle pub qui résonne avec le persona ciblé.</span></button>
+          <button type="button" class="cy-l cy-a4" data-i="4" style="--c:#E5524C;--t:#FFD6D3;--k:#A3201B" data-more="On parle comme la personne visée : avec ses mots, ses problèmes, ses objections. Un message pertinent se reconnaît tout de suite : « c'est pour moi »." data-practice="Reprendre la douleur exprimée par le persona, par exemple « Je stagne en salle »."><span class="cy-name"><i class="cy-dot"></i>Message ciblé</span><span class="cy-short">Utiliser le langage du persona pour créer des messages pertinents.</span></button>
+          <button type="button" class="cy-l cy-a5" data-i="5" style="--c:#DB4FA6;--t:#FBD3EA;--k:#9A1F6D" data-more="Certains réflexes de l'esprit orientent nos décisions : preuve sociale, rareté, ancrage de prix, aversion à la perte. Bien utilisés, ils rendent un message plus convaincant." data-practice="Des avis clients pour la preuve sociale, un prix barré pour l'ancrage."><span class="cy-name"><i class="cy-dot"></i>Biais cognitifs</span><span class="cy-short">Intégrer des biais cognitifs pour influencer les décisions des consommateurs.</span></button>
+          <button type="button" class="cy-l cy-a6" data-i="6" style="--c:#7B5FE8;--t:#E2DAFD;--k:#4A33B5" data-more="Une pub se regarde sur un téléphone : on pense au format vertical, à des textes lisibles en grand et à des sous-titres pour le son coupé." data-practice="Format story 9:16, textes à l'écran lisibles, sous-titres."><span class="cy-name"><i class="cy-dot"></i>Lecture mobile-first</span><span class="cy-short">Concevoir des créations pour une expérience mobile optimale.</span></button>
+          <button type="button" class="cy-l cy-a7" data-i="7" style="--c:#8791A6;--t:#E3E7EF;--k:#39446A" data-more="Une créa s'use : à force d'être vue, elle fatigue l'audience. On teste en continu plusieurs variantes (accroche, visuel, angle) pour garder ce qui marche et renouveler ce qui s'essouffle." data-practice="Une variable testée à la fois, et de nouvelles créas prêtes avant que les anciennes fatiguent."><span class="cy-name"><i class="cy-dot"></i>Test A/B permanent</span><span class="cy-short">Tester et optimiser en permanence les créations pour éviter la fatigue.</span></button>
+          <svg class="cy-oct" viewBox="0 0 400 400" role="group" aria-label="Le cycle de la performance publicitaire en huit étapes">
+<g class="cy-seg" data-i="0" tabindex="0" role="button" aria-label="Dosage de la créativité" style="--tx:0.0px;--ty:-8.0px">
+<polygon points="131.7,23.0 268.3,23.0 234.1,105.4 165.9,105.4" fill="#2FBF7A" stroke="#2FBF7A" stroke-width="8" stroke-linejoin="round"/>
+<g transform="translate(185.0 49.2) scale(1.25)" fill="none" stroke="#0B1533" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"><path d="M12 3v18M5 7h14"/><path d="M5 7l-3 7a3 3 0 0 0 6 0z"/><path d="M19 7l-3 7a3 3 0 0 0 6 0z"/></g>
+</g>
+<g class="cy-seg" data-i="1" tabindex="0" role="button" aria-label="Impact des premières secondes" style="--tx:5.7px;--ty:-5.7px">
+<polygon points="276.9,26.6 373.4,123.1 291.0,157.2 242.8,109.0" fill="#8DB82F" stroke="#8DB82F" stroke-width="8" stroke-linejoin="round"/>
+<g transform="translate(281.0 89.0) scale(1.25)" fill="none" stroke="#0B1533" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.5 2M9.5 2.5h5"/></g>
+</g>
+<g class="cy-seg" data-i="2" tabindex="0" role="button" aria-label="Structure de la créativité" style="--tx:8.0px;--ty:0.0px">
+<polygon points="377.0,131.7 377.0,268.3 294.6,234.1 294.6,165.9" fill="#E2C20F" stroke="#E2C20F" stroke-width="8" stroke-linejoin="round"/>
+<g transform="translate(320.8 185.0) scale(1.25)" fill="none" stroke="#0B1533" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"><rect x="4" y="4" width="16" height="4.5" rx="1.2"/><rect x="4" y="10" width="10" height="4.5" rx="1.2"/><rect x="4" y="16" width="16" height="4.5" rx="1.2"/></g>
+</g>
+<g class="cy-seg" data-i="3" tabindex="0" role="button" aria-label="Angle pub précis" style="--tx:5.7px;--ty:5.7px">
+<polygon points="373.4,276.9 276.9,373.4 242.8,291.0 291.0,242.8" fill="#E58A2D" stroke="#E58A2D" stroke-width="8" stroke-linejoin="round"/>
+<g transform="translate(281.0 281.0) scale(1.25)" fill="none" stroke="#0B1533" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/></g>
+</g>
+<g class="cy-seg" data-i="4" tabindex="0" role="button" aria-label="Message ciblé" style="--tx:0.0px;--ty:8.0px">
+<polygon points="268.3,377.0 131.7,377.0 165.9,294.6 234.1,294.6" fill="#E5524C" stroke="#E5524C" stroke-width="8" stroke-linejoin="round"/>
+<g transform="translate(185.0 320.8) scale(1.25)" fill="none" stroke="#FBFCFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15 9a4 4 0 0 1 0 6M18 7a7 7 0 0 1 0 10"/></g>
+</g>
+<g class="cy-seg" data-i="5" tabindex="0" role="button" aria-label="Biais cognitifs" style="--tx:-5.7px;--ty:5.7px">
+<polygon points="123.1,373.4 26.6,276.9 109.0,242.8 157.2,291.0" fill="#DB4FA6" stroke="#DB4FA6" stroke-width="8" stroke-linejoin="round"/>
+<g transform="translate(89.0 281.0) scale(1.25)" fill="none" stroke="#FBFCFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/></g>
+</g>
+<g class="cy-seg" data-i="6" tabindex="0" role="button" aria-label="Lecture mobile-first" style="--tx:-8.0px;--ty:0.0px">
+<polygon points="23.0,268.3 23.0,131.7 105.4,165.9 105.4,234.1" fill="#7B5FE8" stroke="#7B5FE8" stroke-width="8" stroke-linejoin="round"/>
+<g transform="translate(49.2 185.0) scale(1.25)" fill="none" stroke="#FBFCFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 18.5h2"/></g>
+</g>
+<g class="cy-seg" data-i="7" tabindex="0" role="button" aria-label="Test A/B permanent" style="--tx:-5.7px;--ty:-5.7px">
+<polygon points="26.6,123.1 123.1,26.6 157.2,109.0 109.0,157.2" fill="#8791A6" stroke="#8791A6" stroke-width="8" stroke-linejoin="round"/>
+<g transform="translate(89.0 89.0) scale(1.25)" fill="none" stroke="#FBFCFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"><path d="M5 8h13l-3-3M19 16H6l3 3"/></g>
+</g>
+<circle cx="200" cy="200" r="82" fill="#FBFCFF"/>
+<g transform="translate(170 172) scale(2.5)" fill="none" stroke="#0B1533" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"><rect x="1.5" y="2.5" width="21" height="17" rx="3"/><path d="M1.5 7h21"/><path d="M10 10.5v6l5-3z" fill="#1F5BFF" stroke="#1F5BFF"/></g>
+</svg>
+        </div>
+        <div class="cy-panel" id="cyPanel" aria-live="polite">
+          <p class="cy-hint">Passez la souris sur une étape (ou touchez-la) pour voir l'idée en détail.</p>
+          <div class="cy-body" hidden>
+            <h4 class="cy-ptitle"></h4>
+            <p class="cy-pmore"></p>
+            <p class="cy-ppractice"><strong>En pratique :</strong> <span></span></p>
+          </div>
+        </div>
+      </div>
       <div class="rule" data-r style="--d:100ms">
         <h3>La règle d'or d'une créa qui marche</h3>
         <ul>
