@@ -189,7 +189,7 @@ html:not(.js) .cycle-w:first-child { opacity: 1; transform: none; }
 .rail-btn:hover { background: var(--cobalt); color: var(--white); transform: scale(1.06); }
 .rail-btn:first-child .ico { transform: rotate(180deg); }
 .rail-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; margin-bottom: clamp(2rem, 4vw, 3rem); }
-.rail { display: flex; gap: var(--gap); overflow-x: auto; scroll-snap-type: x proximity; padding: 0 var(--margin) 1rem; scroll-padding-inline: var(--margin); scrollbar-width: none; overscroll-behavior-x: contain; }
+.rail { display: flex; align-items: flex-start; gap: var(--gap); overflow-x: auto; scroll-snap-type: x proximity; padding: 0 var(--margin) 1rem; scroll-padding-inline: var(--margin); scrollbar-width: none; overscroll-behavior-x: contain; }
 .rail::-webkit-scrollbar { display: none; }
 .cmp-card { flex: none; width: clamp(210px, 22vw, 290px); scroll-snap-align: start; }
 .cmp-media { position: relative; display: block; width: 100%; aspect-ratio: 9 / 16; border-radius: var(--r-lg); overflow: hidden; background: var(--ink); transition: transform 0.4s var(--ease); }

@@ -118,6 +118,12 @@
     ['campaigns/lashile-good-hair.jpg', 'Lashilé Beauty', 'Good hair'],
     ['campaigns/mincidelice.jpg', 'Mincidélice', 'Acquisition']
   ];
+  var NEW = [ // créations récentes, en tête du carrousel
+    { poster: 'campaigns/roomca-jeu-reflexe.webp', brand: 'Roomca', title: 'Un jeu pour chaque réflexe', ratio: '810 / 1012', w: 810, h: 1012 },
+    { v: 'campaigns/tailleur-auto-black-friday.mp4', poster: 'campaigns/posters/tailleur-auto-black-friday.jpg', brand: 'Tailleur Auto', title: 'Black Friday' },
+    { poster: 'campaigns/guide-high-school-usa.webp', brand: 'Guide High School USA', title: 'Un club, et tout se joue', ratio: '810 / 1012', w: 810, h: 1012 },
+    { v: 'campaigns/guide-high-school-usa-livre.mp4', poster: 'campaigns/posters/guide-high-school-usa-livre.jpg', brand: 'Guide High School USA', title: 'Le système scolaire américain' }
+  ];
   var rail = $('#rail');
   var active = null;
 
@@ -169,7 +175,8 @@
       vid.addEventListener('timeupdate', function () { if (vid.duration) $('.cmp-bar i', media).style.width = (vid.currentTime / vid.duration * 100) + '%'; });
     } else {
       media = el('div', 'cmp-media');
-      var im = new Image(); im.src = item.poster; im.alt = item.brand + ', ' + item.title; im.loading = 'lazy'; im.width = 338; im.height = 600;
+      var im = new Image(); im.src = item.poster; im.alt = item.brand + ', ' + item.title; im.loading = 'lazy'; im.width = item.w || 338; im.height = item.h || 600;
+      if (item.ratio) media.style.aspectRatio = item.ratio;
       media.appendChild(im);
     }
     c.appendChild(media);
@@ -178,7 +185,7 @@
   }
 
   if (rail) {
-    var items = [], i = 0;
+    var items = NEW.slice(), i = 0;
     while (i < V.length || i < I.length) {
       if (i < V.length) items.push({ v: V[i][0], poster: V[i][1], brand: V[i][2], title: V[i][3] });
       if (i < I.length) items.push({ poster: I[i][0], brand: I[i][1], title: I[i][2] });
