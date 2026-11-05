@@ -5,6 +5,39 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
+  /* ---------- intro : mots, compteur, barre ---------- */
+  var root = document.documentElement;
+  function whenReady(fn) {
+    if (root.classList.contains('ready')) fn(); else document.addEventListener('introdone', fn, { once: true });
+  }
+  (function intro() {
+    var el = $('#intro'), wEl = $('#introWord'), cEl = $('#introCount'), bar = $('#introBar');
+    var done = false;
+    function finish() {
+      if (done) return; done = true;
+      root.classList.add('ready');
+      if (el) { el.classList.add('is-out'); setTimeout(function () { root.classList.remove('intro'); }, 750); } else { root.classList.remove('intro'); }
+      document.dispatchEvent(new Event('introdone'));
+    }
+    if (!el || !wEl || reduce) { root.classList.remove('intro'); finish(); return; }
+    var words = ['Analyse.', 'Stratégie.', 'Performance.'], wi = 0, dur = 2400, t0 = null;
+    function swap(i) {
+      wEl.classList.add('out');
+      setTimeout(function () { wEl.textContent = words[i]; wEl.classList.remove('out'); }, 220);
+    }
+    (function tick(t) {
+      if (done) return;
+      if (t0 === null) t0 = t;
+      var p = Math.min(1, (t - t0) / dur);
+      cEl.textContent = String(Math.round(p * 100)).padStart(3, '0');
+      bar.style.width = (p * 100) + '%';
+      var idx = Math.min(words.length - 1, Math.floor(p * words.length));
+      if (idx !== wi) { wi = idx; swap(idx); }
+      if (p < 1) requestAnimationFrame(tick); else setTimeout(finish, 350);
+    })(performance.now());
+  })();
+
+  whenReady(function () {
   /* ---------- révélations au défilement (échelonnées par groupe) ---------- */
   $$('[data-stagger]').forEach(function (g) {
     $$('[data-r]', g).forEach(function (el, i) { if (!el.style.getPropertyValue('--d')) el.style.setProperty('--d', (i * 90) + 'ms'); });
@@ -57,6 +90,8 @@
       }, 2200);
     }
   }
+
+  });
 
   /* ---------- carrousel de campagnes ---------- */
   var V = [ // [fichier, vignette, marque, titre]

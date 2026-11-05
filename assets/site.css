@@ -370,12 +370,30 @@ button.cmp-media:hover, button.cmp-media:focus-visible { box-shadow: 0 26px 46px
 .band-set i { width: 14px; height: 14px; background: #FFC236; transform: rotate(45deg); flex: none; }
 @keyframes slide { to { transform: translateX(-50%); } }
 
+/* ---------- intro ---------- */
+#intro { display: none; }
+.intro #intro { display: block; position: fixed; inset: 0; z-index: 200; background: var(--cobalt); color: var(--white); overflow: hidden; transition: opacity 0.6s var(--ease), transform 0.7s var(--ease); }
+#intro.is-out { opacity: 0; transform: translateY(-4%); pointer-events: none; }
+.intro-logo { position: absolute; left: var(--margin); top: 26px; font-family: var(--f-d); font-weight: 800; font-size: 1.3rem; letter-spacing: -0.03em; }
+.intro-word-wrap { position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden; padding-inline: var(--margin); }
+#introWord { font-family: var(--f-d); font-weight: 700; font-size: clamp(2.75rem, 1rem + 10vw, 9rem); letter-spacing: -0.04em; line-height: 1; opacity: 0; transform: translateY(26px); animation: introIn 0.35s var(--ease) forwards; }
+#introWord.out { animation: introOut 0.22s var(--ease) forwards; }
+@keyframes introIn { to { opacity: 1; transform: none; } }
+@keyframes introOut { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-26px); } }
+#introCount { position: absolute; right: var(--margin); bottom: 30px; font-family: var(--f-d); font-weight: 700; font-size: clamp(3.5rem, 1.5rem + 8vw, 9rem); letter-spacing: -0.04em; line-height: 1; }
+.intro-3d { position: absolute; left: calc(var(--margin) - 1rem); bottom: 14px; width: clamp(140px, 22vw, 300px); aspect-ratio: 1; pointer-events: none; }
+.intro-3d canvas { width: 100%; height: 100%; }
+.intro-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 8px; background: rgba(251, 252, 255, 0.25); }
+.intro-bar i { display: block; height: 100%; width: 0; background: var(--white); }
+@media (prefers-reduced-motion: reduce) { .intro #intro { display: none; } }
+
 /* ---------- mouvement : révélations ---------- */
 .js [data-r] { opacity: 0; transform: translateY(28px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); transition-delay: var(--d, 0ms); }
 .js [data-r].is-in { opacity: 1; transform: none; }
-.js .hero h1 .w > span { transform: translateY(105%); animation: rise 0.9s var(--ease) forwards; animation-delay: calc(var(--i, 0) * 90ms + 150ms); }
+.js .hero h1 .w > span { transform: translateY(105%); }
+.ready .hero h1 .w > span { animation: rise 0.9s var(--ease) forwards; animation-delay: calc(var(--i, 0) * 90ms + 150ms); }
 @keyframes rise { to { transform: none; } }
-.js .hero-photo { animation: grow 1.1s var(--ease) both 0.2s; }
+.ready .hero-photo { animation: grow 1.1s var(--ease) both 0.2s; }
 @keyframes grow { from { clip-path: inset(12% 12% 12% 12% round 40px); opacity: 0; } to { clip-path: inset(0 round 40px); opacity: 1; } }
 
 @media (prefers-reduced-motion: reduce) {
