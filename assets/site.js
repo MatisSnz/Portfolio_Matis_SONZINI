@@ -5,6 +5,40 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
+  /* ---------- mails préremplis : toujours un modèle professionnel ---------- */
+  var TO = 'sonzini.matis@gmail.com', FILL = '[à compléter]';
+  function buildMail(o) {
+    o = o || {};
+    var L = ['Bonjour Matis,', '', "J'espère que tu vas bien."];
+    if (o.topic) L.push('', 'Je te contacte au sujet de : ' + o.topic + '.');
+    L.push('',
+      "J'ai un projet : " + FILL,
+      'Besoin : ' + (o.needs && o.needs.length ? o.needs.join(', ') : FILL),
+      'Côté budget, nous sommes actuellement sur : ' + (o.budget ? o.budget + ' de budget média par mois' : FILL),
+      'Nous aimerions prendre une direction : ' + FILL,
+      'Échéance souhaitée : ' + FILL,
+      '',
+      'Pour que tu comprennes mieux le projet :',
+      '- Marque ou site : ' + FILL,
+      '- Contexte et objectif principal : ' + FILL,
+      '- Cible : ' + FILL,
+      '- Plateformes déjà utilisées : ' + FILL,
+      '',
+      'Je reste disponible pour un échange par téléphone ou en visio.',
+      '',
+      'Bien cordialement,',
+      '[Prénom et nom]',
+      '[Entreprise]',
+      '[Téléphone]');
+    return 'mailto:' + TO + '?subject=' + encodeURIComponent(o.subject || 'Prise de contact') + '&body=' + encodeURIComponent(L.join('\n'));
+  }
+  $$('a[href^="mailto:"]').forEach(function (a) {
+    if (a.id === 'send') return;
+    var m = (a.getAttribute('href') || '').match(/subject=([^&]*)/);
+    var topic = m ? decodeURIComponent(m[1]) : '';
+    a.setAttribute('href', topic ? buildMail({ subject: 'Projet : ' + topic, topic: topic }) : buildMail({}));
+  });
+
   /* ---------- intro : mots, compteur, barre ---------- */
   var root = document.documentElement;
   function whenReady(fn) {
@@ -118,6 +152,10 @@
     ['campaigns/lashile-good-hair.jpg', 'Lashilé Beauty', 'Good hair'],
     ['campaigns/mincidelice.jpg', 'Mincidélice', 'Acquisition']
   ];
+  var NEW = [ // créations récentes (format story), en tête du carrousel
+    { v: 'campaigns/tailleur-auto-black-friday.mp4', poster: 'campaigns/posters/tailleur-auto-black-friday.jpg', brand: 'Tailleur Auto', title: 'Black Friday' },
+    { v: 'campaigns/guide-high-school-usa-livre.mp4', poster: 'campaigns/posters/guide-high-school-usa-livre.jpg', brand: 'Guide High School USA', title: 'Le système scolaire américain' }
+  ];
   var rail = $('#rail');
   var active = null;
 
@@ -178,7 +216,7 @@
   }
 
   if (rail) {
-    var items = [], i = 0;
+    var items = NEW.slice(), i = 0;
     while (i < V.length || i < I.length) {
       if (i < V.length) items.push({ v: V[i][0], poster: V[i][1], brand: V[i][2], title: V[i][3] });
       if (i < I.length) items.push({ poster: I[i][0], brand: I[i][1], title: I[i][2] });
@@ -192,6 +230,39 @@
       if (e.key === 'ArrowRight') { rail.scrollBy({ left: step() / 2, behavior: 'smooth' }); }
       if (e.key === 'ArrowLeft') { rail.scrollBy({ left: -step() / 2, behavior: 'smooth' }); }
     });
+    // glisser à la main (souris) avec inertie ; le tactile utilise le défilement natif
+    (function drag() {
+      var down = false, moved = false, sx = 0, sl = 0, lastX = 0, lastT = 0, v = 0, raf = 0;
+      rail.addEventListener('pointerdown', function (e) {
+        if (e.pointerType !== 'mouse' || e.button !== 0) return;
+        cancelAnimationFrame(raf); rail.classList.remove('is-dragging');
+        down = true; moved = false; sx = e.clientX; sl = rail.scrollLeft; lastX = e.clientX; lastT = performance.now(); v = 0;
+      });
+      rail.addEventListener('pointermove', function (e) {
+        if (!down) return;
+        var dx = e.clientX - sx;
+        if (!moved && Math.abs(dx) > 5) { moved = true; rail.classList.add('is-dragging'); try { rail.setPointerCapture(e.pointerId); } catch (err) {} }
+        if (!moved) return;
+        rail.scrollLeft = sl - dx;
+        var now = performance.now(), dt = now - lastT;
+        if (dt > 0) v = (e.clientX - lastX) / dt;
+        lastX = e.clientX; lastT = now;
+      });
+      function end() {
+        if (!down) return; down = false;
+        if (!moved) return;
+        var vel = -v * 16;
+        (function glide() {
+          if (Math.abs(vel) < 0.6) { rail.classList.remove('is-dragging'); return; }
+          rail.scrollLeft += vel; vel *= 0.94; raf = requestAnimationFrame(glide);
+        })();
+      }
+      rail.addEventListener('pointerup', end);
+      rail.addEventListener('pointercancel', end);
+      rail.addEventListener('click', function (e) { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
+      rail.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    })();
+
     // pause la vidéo active quand elle sort de l'écran
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (en) { if (!en[0].isIntersecting) stop(active); }, { threshold: 0 }).observe(rail);
@@ -204,12 +275,7 @@
   function refresh() {
     if (!send) return;
     var needs = sel('needs'), budget = sel('budgets');
-    var subject = 'Projet' + (needs.length ? ' : ' + needs.join(', ') : '');
-    var body = 'Bonjour Matis,\n\n' +
-      (needs.length ? 'Mon besoin : ' + needs.join(', ') + '.\n' : '') +
-      (budget.length ? 'Budget média mensuel : ' + budget[0] + '.\n' : '') +
-      '\nVoici quelques mots sur mon projet :\n\n';
-    send.href = 'mailto:sonzini.matis@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    send.href = buildMail({ subject: needs.length ? 'Projet : ' + needs.join(', ') : 'Nouveau projet', needs: needs, budget: budget[0] });
   }
   $$('#needs .pick').forEach(function (b) {
     b.addEventListener('click', function () { b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); refresh(); });
@@ -222,4 +288,33 @@
     });
   });
   refresh();
+
+  /* ---------- cycle de la performance : survol, focus, toucher ---------- */
+  (function cycle() {
+    var cy = $('#cy'); if (!cy) return;
+    var panel = $('#cyPanel'), body = $('.cy-body', panel), hint = $('.cy-hint', panel);
+    var labels = $$('.cy-l', cy), segs = $$('.cy-seg', cy), cur = -1;
+    function activate(i) {
+      if (i === cur) return; cur = i;
+      var l = labels[i];
+      labels.forEach(function (x, k) { x.classList.toggle('is-active', k === i); });
+      segs.forEach(function (x, k) { x.classList.toggle('is-active', k === i); });
+      cy.classList.add('has-active');
+      panel.style.setProperty('--t', l.style.getPropertyValue('--t'));
+      panel.style.setProperty('--k', l.style.getPropertyValue('--k'));
+      panel.classList.add('is-on');
+      hint.hidden = true; body.hidden = false;
+      $('.cy-ptitle', panel).textContent = $('.cy-name', l).textContent;
+      $('.cy-pmore', panel).textContent = l.getAttribute('data-more');
+      $('.cy-ppractice span', panel).textContent = l.getAttribute('data-practice');
+      body.style.animation = 'none'; void body.offsetWidth; body.style.animation = '';
+    }
+    labels.concat(segs).forEach(function (el) {
+      var i = parseInt(el.getAttribute('data-i'), 10);
+      el.addEventListener('mouseenter', function () { activate(i); });
+      el.addEventListener('focus', function () { activate(i); });
+      el.addEventListener('click', function () { activate(i); });
+      el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(i); } });
+    });
+  })();
 })();
